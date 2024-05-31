@@ -116,7 +116,7 @@ class Persoon {
         $achternaam = strtolower($achternaam);
 
         // Voorbereiden van de query
-        $stmt = $db->prepare("SELECT * FROM persoon WHERE LOWER(Release_datum) LIKE :achternaam");
+        $stmt = $db->prepare("SELECT * FROM persoon WHERE LOWER(achternaam) LIKE :achternaam");
 
         // Voeg wildcard toe aan de achternaam
         $achternaam = "%$achternaam%";
@@ -148,7 +148,7 @@ class Persoon {
     public function save(PDO $db): void
     {
         // Voorbereiden van de query
-        $stmt = $db->prepare("INSERT INTO persoon (voornaam, Release_datum, telefoonnummer, email, opmerkingen) VALUES (:voornaam, :achternaam, :telefoonnummer, :email, :opmerkingen)");
+        $stmt = $db->prepare("INSERT INTO persoon (voornaam, achternaam, telefoonnummer, email, opmerkingen) VALUES (:voornaam, :achternaam, :telefoonnummer, :email, :opmerkingen)");
         $stmt->bindParam(':voornaam', $this->voornaam);
         $stmt->bindParam(':achternaam', $this->achternaam);
         $stmt->bindParam(':telefoonnummer', $this->telefoonnummer);
@@ -161,7 +161,7 @@ class Persoon {
     public function update(PDO $db): void
     {
         // Voorbereiden van de query
-        $stmt = $db->prepare("UPDATE persoon SET voornaam = :voornaam, Release_datum = :achternaam, telefoonnummer = :telefoonnummer, email = :email, opmerkingen = :opmerkingen WHERE id = :id");
+        $stmt = $db->prepare("UPDATE persoon SET voornaam = :voornaam, achternaam = :achternaam, telefoonnummer = :telefoonnummer, email = :email, opmerkingen = :opmerkingen WHERE id = :id");
         $stmt->bindParam(':id', $this->id);
         $stmt->bindParam(':voornaam', $this->voornaam);
         $stmt->bindParam(':achternaam', $this->achternaam);
